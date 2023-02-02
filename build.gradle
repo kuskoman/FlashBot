@@ -1,0 +1,28 @@
+plugins {
+    id 'groovy'
+}
+
+group 'github.com.kuskoman.FlashBot'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+    jcenter()
+}
+
+dependencies {
+    implementation 'org.apache.groovy:groovy:4.0.2'
+    implementation 'io.github.cdimascio:dotenv-java:2.3.1'
+    implementation 'net.dv8tion:JDA:4.0.0_44'
+
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
+    
+}
+
+test {
+    useJUnitPlatform()
+}
+
+apply plugin: 'application'
+mainClassName = 'Main'
