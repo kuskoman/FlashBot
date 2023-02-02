@@ -15,6 +15,7 @@ dependencies {
     implementation 'io.github.cdimascio:dotenv-java:2.3.1'
     implementation 'net.dv8tion:JDA:4.0.0_44'
     implementation 'org.springframework.boot:spring-boot-starter:2.5.7'
+    implementation 'org.springframework.boot:spring-boot-starter-web:2.5.7'
 
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
