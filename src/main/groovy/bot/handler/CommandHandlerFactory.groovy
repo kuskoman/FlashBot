@@ -3,14 +3,21 @@ package bot.handler
 import bot.commands.*
 
 class CommandHandlerFactory {
-    private static Handler handler = new Handler()
+    private static CommandHandler handler
 
-    CommandHandlerFactory() {
-        handler.addCommand(new ListCommandsCommand(handler))
-        handler.addCommand(new PingCommand())
+    static CommandHandler getHandler() {
+        if (handler == null) {
+            def commands = getCommands()
+            handler = new CommandHandler(commands)
+        }
+
+        return handler
     }
 
-    static Handler getHandler() {
-        return handler
+    private static List<Command> getCommands() {
+        return [
+            new ListCommandsCommand(),
+            new PingCommand()
+        ]
     }
 }

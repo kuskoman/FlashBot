@@ -25,8 +25,7 @@ class ListCommandsCommand implements Command {
     def handler = CommandHandlerFactory.getHandler()
     def commands = handler.getCommands()
     def message = "Commands: "
-    message += commands.map { command -> message += command.getName() }.join(", ")
-    message = message.substring(0, message.length() - 2)
+    message += commands.collect { command -> command.getName() }.join(", ")
     event.getChannel().sendMessage(message).queue()
   }
 }

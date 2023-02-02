@@ -6,7 +6,7 @@ import bot.handler.*
 
 class FlashBot extends ListenerAdapter {
   private String prefix;
-  private Handler handler;
+  private CommandHandler handler;
 
   FlashBot(String prefix = "!") {
     this.prefix = prefix
@@ -23,10 +23,6 @@ class FlashBot extends ListenerAdapter {
 
   @Override
   void onMessageReceived(MessageReceivedEvent event) {
-    if (!event.isFromGuild()) {
-      return
-    }
-
     if (event.getAuthor().isBot()) {
       return
     }
