@@ -23,7 +23,7 @@ class CommandHandler {
     return commands.values().toList()
   }
 
-  void executeCommand(String command, MessageReceivedEvent event) {
+  void executeCommand(String command, MessageReceivedEvent event, String args) {
     def commandhandler = getCommandHandler(command)
 
     if (commandhandler == null) {
@@ -31,7 +31,7 @@ class CommandHandler {
       return
     }
 
-    commandhandler.execute(event)
+    commandhandler.execute(event, args)
   }
 
   private Command getCommandHandler(String command) {

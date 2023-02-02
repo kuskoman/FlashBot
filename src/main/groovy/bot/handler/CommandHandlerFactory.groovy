@@ -17,7 +17,8 @@ class CommandHandlerFactory {
     private static List<Command> getCommands() {
         return [
             new ListCommandsCommand(),
-            new PingCommand()
+            new PingCommand(),
+            new HelpCommand()
         ]
     }
 }

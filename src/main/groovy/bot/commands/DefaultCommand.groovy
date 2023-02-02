@@ -19,7 +19,7 @@ class DefaultCommand implements Command {
     }
 
     @Override
-    void execute(MessageReceivedEvent event) {
+    void execute(MessageReceivedEvent event, String args) {
         def message = "Command not found. Use `list` command to list all commands"
         event.getChannel().sendMessage(message).queue()
     }

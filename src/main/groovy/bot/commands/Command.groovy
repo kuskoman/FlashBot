@@ -6,5 +6,5 @@ interface Command {
   String getName()
   String getDescription()
   String getUsage()
-  void execute(MessageReceivedEvent event)
+  void execute(MessageReceivedEvent event, String args)
 }

@@ -21,7 +21,7 @@ class ListCommandsCommand implements Command {
   }
 
   @Override
-  void execute(MessageReceivedEvent event) {
+  void execute(MessageReceivedEvent event, String args) {
     def handler = CommandHandlerFactory.getHandler()
     def commands = handler.getCommands()
     def message = "Commands: "

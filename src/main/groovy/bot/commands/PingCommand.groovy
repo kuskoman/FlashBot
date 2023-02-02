@@ -19,7 +19,7 @@ public class PingCommand implements Command {
     }
 
     @Override
-    public void execute(MessageReceivedEvent event) {
+    public void execute(MessageReceivedEvent event, String args) {
         event.getChannel().sendMessage("Pong!").queue();
     }
 }

@@ -33,7 +33,8 @@ class FlashBot extends ListenerAdapter {
     }
 
     def command = messageContent.substring(prefix.length()).split(" ")[0]
-    handler.executeCommand(command, event)
+    def args = messageContent.substring(prefix.length() + command.length()).trim()
+    handler.executeCommand(command, event, args)
   }
 }
 
