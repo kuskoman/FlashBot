@@ -8,11 +8,11 @@ COPY gradle ./gradle
 RUN gradle dependencies --no-daemon
 
 COPY . .
-RUN gradle build --no-daemon 
+RUN gradle jar --no-daemon 
 
 
 FROM amazoncorretto:17.0.6-alpine3.17 as runtime
 
 COPY --from=build /app/build/libs/*.jar /app/app.jar
 
-ENTRYPOINT [ "java", '-jar', '/app/app.jar' ]
+# CMD [ "java", 'jar', '/app/app.jar' ]

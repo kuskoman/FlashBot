@@ -48,3 +48,6 @@ bin/
 **/.env
 **/.env.*
 **/!.env.example
+
+# Tests
+/src/test/

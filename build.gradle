@@ -30,3 +30,15 @@ test {
 
 apply plugin: 'application'
 mainClassName = 'Main'
+
+jar {
+    manifest {
+        attributes 'Main-Class': 'Main'
+    }
+
+    from {
+        configurations.runtimeClasspath.findAll { !it.name.endsWith('.pom') }.collect { it.isDirectory() ? it : zipTree(it) }
+    }
+
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+}
