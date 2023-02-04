@@ -22,7 +22,7 @@ class FlashBot extends ListenerAdapter {
   }
 
   @Override
-  void onMessageReceived(MessageReceivedEvent event) {
+  void onMessageReceived(MessageReceivedEvent event) {    
     if (event.getAuthor().isBot()) {
       return
     }
@@ -37,4 +37,3 @@ class FlashBot extends ListenerAdapter {
     handler.executeCommand(command, event, args)
   }
 }
-
