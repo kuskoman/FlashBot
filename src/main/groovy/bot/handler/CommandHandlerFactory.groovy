@@ -22,6 +22,7 @@ class CommandHandlerFactory {
             new PingCommand(),
             new HelpCommand(),
             new AddRadioCommand(),
+            new RemoveRadioCommand(),
         ]
     }
 
