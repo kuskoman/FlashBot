@@ -23,6 +23,7 @@ class CommandHandlerFactory {
             new HelpCommand(),
             new AddRadioCommand(),
             new RemoveRadioCommand(),
+            new ListRadioCommand(),
         ]
     }
 

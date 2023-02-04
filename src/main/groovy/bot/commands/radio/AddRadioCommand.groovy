@@ -31,8 +31,8 @@ class AddRadioCommand implements Command {
         }
         def radioName = splittedArgs[0]
         def radioUrl = splittedArgs[1]
-        def bucket = redis.getBucket('radios')
-        bucket.set(radioName, radioUrl)
+        def map = redis.getMap('radios')
+        map.put(radioName, radioUrl)
         event.getChannel().sendMessage('Radio added').queue()
     }
 
