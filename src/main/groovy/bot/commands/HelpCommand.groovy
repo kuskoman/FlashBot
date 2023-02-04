@@ -4,19 +4,20 @@ import net.dv8tion.jda.api.events.message.MessageReceivedEvent
 import bot.handler.CommandHandlerFactory
 
 class HelpCommand implements Command {
+
     @Override
     String getName() {
-        return "help"
+        return 'help'
     }
 
     @Override
     String getDescription() {
-        return "Shows help for given command"
+        return 'Shows help for given command'
     }
 
     @Override
     String getUsage() {
-        return "help <command>"
+        return 'help <command>'
     }
 
     @Override
@@ -35,4 +36,5 @@ Usage: `${command.getUsage()}`
 
         event.getChannel().sendMessage(helpMessage).queue()
     }
+
 }

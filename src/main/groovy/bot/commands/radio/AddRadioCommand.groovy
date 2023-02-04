@@ -35,4 +35,5 @@ class AddRadioCommand implements Command {
         bucket.set(radioName, radioUrl)
         event.getChannel().sendMessage('Radio added').queue()
     }
+
 }
