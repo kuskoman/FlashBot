@@ -1,8 +1,10 @@
 package bot.handler
 
 import bot.commands.*
+import bot.commands.radio.*
 
 class CommandHandlerFactory {
+
     private static CommandHandler handler
 
     static CommandHandler getHandler() {
@@ -18,7 +20,9 @@ class CommandHandlerFactory {
         return [
             new ListCommandsCommand(),
             new PingCommand(),
-            new HelpCommand()
+            new HelpCommand(),
+            new AddRadioCommand(),
         ]
     }
+
 }
