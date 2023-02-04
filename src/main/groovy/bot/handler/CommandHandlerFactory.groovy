@@ -24,6 +24,7 @@ class CommandHandlerFactory {
             new AddRadioCommand(),
             new RemoveRadioCommand(),
             new ListRadioCommand(),
+            new PlayRadioCommand(),
         ]
     }
 

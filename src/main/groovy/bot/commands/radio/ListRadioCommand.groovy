@@ -25,7 +25,7 @@ class ListRadioCommand implements Command {
     void execute(MessageReceivedEvent event, String args) {
         def redis = RedisClientFactory.getClient()
         def map = redis.getMap('radios')
-        def radios = map.readAllMap();
+        def radios = map.readAllMap()
         def message = 'Radios:\n'
         radios.each { radio ->
             message += "${radio.key} - ${radio.value}\n"
