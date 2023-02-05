@@ -7,6 +7,7 @@ import com.sedmelluq.discord.lavaplayer.source.AudioSourceManagers
 import com.sedmelluq.discord.lavaplayer.tools.FriendlyException
 import com.sedmelluq.discord.lavaplayer.track.AudioPlaylist
 import com.sedmelluq.discord.lavaplayer.track.AudioTrack
+import com.sedmelluq.discord.lavaplayer.source.http.HttpAudioTrack
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent
 
 /* groovylint-disable-next-line LineLength */
@@ -38,9 +39,14 @@ class PlayerManager {
 
             @Override
             void trackLoaded(AudioTrack track) {
-                println "Track loaded: $track.info.title"
+                def trackValid = isValidHttpTrack(track)
+                if (!trackValid) {
+                    println 'Only HTTP tracks are supported'
+                    notifyAboutError(guild, 'Only HTTP tracks are supported')
+                    return
+                }
 
-                println player.startTrack(track, false)
+                player.startTrack(track, false)
             }
 
             @Override
@@ -89,6 +95,10 @@ class PlayerManager {
 
         def voiceChannel = event.getMember().getVoiceState().getChannel()
         audioManager.openAudioConnection(voiceChannel)
+    }
+
+    private static isValidHttpTrack(AudioTrack track) {
+        return track instanceof HttpAudioTrack
     }
 
 }

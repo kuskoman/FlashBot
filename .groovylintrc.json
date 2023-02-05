@@ -16,6 +16,9 @@
         "FieldTypeRequired": {
             "enabled": false
         },
+        "Instanceof": {
+            "enabled": false
+        },
         "NoDef": {
             "enabled": false
         },
