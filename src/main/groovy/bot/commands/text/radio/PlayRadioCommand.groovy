@@ -39,7 +39,6 @@ class PlayRadioTextCommand implements TextCommand {
 
         def playerManager = PlayerManager.getInstance()
         playerManager.loadAndPlay(event, radioUrl)
-        event.getChannel().sendMessage("Radio ${radioName} playin'").queue()
     }
 
 }

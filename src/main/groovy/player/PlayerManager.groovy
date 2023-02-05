@@ -47,6 +47,7 @@ class PlayerManager {
 
                 println "Playing $track.info.title"
                 player.startTrack(track, false)
+                event.getChannel().sendMessage("Playing $track.info.title").queue()
             }
 
             @Override
@@ -56,12 +57,16 @@ class PlayerManager {
 
             @Override
             void noMatches() {
-                notifyAboutError(guild, "Nothing found by $trackUrl")
+                def message = "Nothing found by $trackUrl"
+                println message
+                notifyAboutError(guild, message)
             }
 
             @Override
             void loadFailed(FriendlyException exception) {
-                notifyAboutError(guild, "Could not play: $exception")
+                def message = "Could not play: $exception.message"
+                println message
+                notifyAboutError(guild, message)
             }
 
         })
