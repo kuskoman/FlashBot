@@ -4,29 +4,29 @@ import radio.RadioManager
 import bot.commands.text.Command
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent
 
-class BackupRadioCommand implements Command {
+class RestoreRadioBackupCommand implements Command {
 
     @Override
     String getName() {
-        return 'backupradio'
+        return 'restoreradiobackup'
     }
 
     @Override
     String getDescription() {
-        return 'Backup the radios'
+        return 'Restore the radios from a backup'
     }
 
     @Override
     String getUsage() {
-        return 'backupradio'
+        return 'restoreradiobackup <backup>'
     }
 
     @Override
     void execute(MessageReceivedEvent event, String args) {
         def radioManager = new RadioManager()
-        def backup = radioManager.getRadioBackup()
-        def backupCodeBlock = "`${backup}`"
-        event.getChannel().sendMessage("Radios backed up:\n${backupCodeBlock}").queue()
+        def backup = args
+        radioManager.restoreRadioBackupJson(backup)
+        event.getChannel().sendMessage('Radios restored').queue()
     }
 
 }

@@ -27,6 +27,7 @@ class TextCommandsHandlerFactory {
             new PlayRadioCommand(),
             new RemoveRadioCommand(),
             new BackupRadioCommand(),
+            new RestoreRadioBackupCommand(),
         ]
     }
 

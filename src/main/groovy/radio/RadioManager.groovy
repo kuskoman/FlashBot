@@ -1,7 +1,8 @@
 package radio
 
 import redis.RedisClientFactory
-import groovy.json.JsonBuilder
+import groovy.json.*
+import java.util.Base64
 
 class RadioManager {
 
@@ -28,11 +29,27 @@ class RadioManager {
         return map.get(name)
     }
 
-    static getRadioBackupJson() {
+    static getRadioBackup() {
         def radios = getRadios()
         def json = new JsonBuilder(radios).toPrettyString()
+        def base64Json = Base64.getEncoder().encodeToString(json.getBytes())
 
-        return json
+        return base64Json
+    }
+
+    static restoreRadioBackupJson(String base64Backup) {
+        def json = new String(Base64.getDecoder().decode(base64Backup))
+        def radios = new JsonSlurper().parseText(json)
+        def map = redis.getMap(mapKey)
+        removeAllRadios()
+        radios.each { radio ->
+            map.put(radio.key, radio.value)
+        }
+    }
+
+    static removeAllRadios() {
+        def map = redis.getMap(mapKey)
+        map.clear()
     }
 
 }
