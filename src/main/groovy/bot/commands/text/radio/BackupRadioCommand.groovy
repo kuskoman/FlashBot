@@ -25,7 +25,8 @@ class BackupRadioCommand implements Command {
     void execute(MessageReceivedEvent event, String args) {
         def radioManager = new RadioManager()
         def backup = radioManager.getRadioBackupJson()
-        event.getChannel().sendMessage("Radios backed up:\n`${backup}`").queue()
+        def backupCodeBlock = "```${backup}```"
+        event.getChannel().sendMessage("Radios backed up:\n${backupCodeBlock}").queue()
     }
 
 }

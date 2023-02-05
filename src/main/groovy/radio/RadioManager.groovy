@@ -1,6 +1,7 @@
 package radio
 
 import redis.RedisClientFactory
+import groovy.json.JsonBuilder
 
 class RadioManager {
 
@@ -29,13 +30,9 @@ class RadioManager {
 
     static getRadioBackupJson() {
         def radios = getRadios()
+        def json = new JsonBuilder(radios).toPrettyString()
 
-        return {
-            radios.each { radio ->
-                radio.key(radio.key)
-                radio.value(radio.value)
-            }
-        }.toString()
+        return json
     }
 
 }
