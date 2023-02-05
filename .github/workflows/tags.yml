@@ -27,15 +27,19 @@ jobs:
     steps:
       - name: Checkout project sources
         uses: actions/checkout@v2
-      - name: Set lowercased repository name
-        run: echo "REPOSITORY_NAME=$(echo ${{ github.event.repository.name }} | tr '[:upper:]' '[:lower:]')" >> $GITHUB_ENV
+      - name: Set lowercased repository name and tag name
+        run: |
+          echo "repository_lowercased_name=$(echo ${{ github.event.repository.name }} | tr '[:upper:]' '[:lower:]')" >> $GITHUB_ENV
+          echo "tag_name=${GITHUB_REF##*/}" >> $GITHUB_ENV
       - name: Build and push Docker image
         uses: docker/build-push-action@v2
         with:
           context: .
           file: ./Dockerfile
           push: true
-          tags: ghcr.io/${{ github.repository_owner }}/$REPOSITORY_NAME:${{ github.ref }}
+          tags: ghcr.io/${{ github.repository_owner }}/$REPOSITORY_NAME:${{ env.tag_name }}
+          username: ${{ github.repository_owner }}
+          password: ${{ secrets.GITHUB_TOKEN }}
 
   create-release:
     needs:
