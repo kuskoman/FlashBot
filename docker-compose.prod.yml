@@ -1,0 +1,16 @@
+version: "3.7"
+services:
+  redis:
+    image: redis:7.0.8-alpine
+    restart: unless-stopped
+    volumes:
+      - redis-data:/data
+  bot:
+    build: .
+    restart: unless-stopped
+    environment:
+      REDIS_URL: redis://redis:6379
+      DISCORD_BOT_TOKEN: "${DISCORD_BOT_TOKEN:?You mut set discord token}"
+
+volumes:
+  redis-data:
