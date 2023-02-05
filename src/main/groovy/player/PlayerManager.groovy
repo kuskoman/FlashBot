@@ -13,35 +13,39 @@ import net.dv8tion.jda.api.events.message.MessageReceivedEvent
 // https://github.com/sedmelluq/lavaplayer/blob/master/demo-jda/src/main/java/com/sedmelluq/discord/lavaplayer/demo/jda/Main.java
 class PlayerManager {
 
-    private final static musicManagers = new HashMap<String, GuildPlayer>()
-    private static final playerManager = new DefaultAudioPlayerManager()
+    private static final PlayerManager INSTANCE = new PlayerManager()
+    private final musicManagers = new HashMap<String, GuildPlayer>()
+    private final playerManager = new DefaultAudioPlayerManager()
 
-    static {
+    PlayerManager() {
+        println 'Registering remote and local sources'
         AudioSourceManagers.registerRemoteSources(playerManager)
         AudioSourceManagers.registerLocalSource(playerManager)
     }
 
-    public static void play(MessageReceivedEvent event, String trackUrl) {
+    public static PlayerManager getInstance() {
+        return INSTANCE
+    }
+
+    public void loadAndPlay(MessageReceivedEvent event, String trackUrl) {
+        println 'loadAndPlay'
+
         def guild = event.getGuild()
         def musicManager = getGuildAudioPlayer(guild)
+        def player = musicManager.player
         connectToVoiceChannel(event)
         playerManager.loadItemOrdered(musicManager, trackUrl, new AudioLoadResultHandler() {
 
             @Override
             void trackLoaded(AudioTrack track) {
-                println 'trackLoaded'
-                play(guild, track)
+                println "Track loaded: $track.info.title"
+
+                println player.startTrack(track, false)
             }
 
             @Override
             void playlistLoaded(AudioPlaylist playlist) {
-                AudioTrack firstTrack = playlist.getSelectedTrack()
-
-                if (firstTrack == null) {
-                    firstTrack = playlist.getTracks().get(0)
-                }
-
-                play(guild, firstTrack)
+                notifyAboutError(guild, 'Playlists are not supported')
             }
 
             @Override
@@ -57,7 +61,7 @@ class PlayerManager {
         })
     }
 
-    private static GuildPlayer getGuildAudioPlayer(Guild guild) {
+    private GuildPlayer getGuildAudioPlayer(Guild guild) {
         def guildId = Long.parseLong(guild.getId())
         def musicManager = musicManagers.get(guildId)
 
@@ -71,11 +75,11 @@ class PlayerManager {
         return musicManager
     }
 
-    private static void notifyAboutError(MessageReceivedEvent event, String message) {
+    private void notifyAboutError(MessageReceivedEvent event, String message) {
         event.getChannel().sendMessage(message).queue()
     }
 
-    private static void connectToVoiceChannel(MessageReceivedEvent event) {
+    private void connectToVoiceChannel(MessageReceivedEvent event) {
         def audioManager = event.getGuild().getAudioManager()
 
         if (!event.getMember().getVoiceState().inAudioChannel()) {
