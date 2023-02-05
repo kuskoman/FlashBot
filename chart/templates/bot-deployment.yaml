@@ -1,0 +1,49 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "flashbot.fullname" $ }}
+  labels:
+    app: flashbot
+    name: {{ include "flashbot.fullname" $ }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: flashbot
+      name: {{ include "flashbot.fullname" $ }}
+  template:
+    metadata:
+      labels:
+        app: flashbot
+        name: {{ include "flashbot.fullname" $ }}
+    spec:
+      containers:
+      - name: flashbot
+        image: {{ default "kuskoman/flashbot:latest" .Values.image }}
+        imagePullPolicy: {{ default "Always" .Values.imagePullPolicy }}
+        env:
+        {{- if .Values.discordBotToken }}
+        - name: DISCORD_BOT_TOKEN
+          value: {{ .Values.discordBotToken }}
+        {{ else  if .Values.discordBotTokenSecret }}
+        - name: DISCORD_BOT_TOKEN
+          valueFrom:
+            secretKeyRef:
+              name: {{ .Values.discordBotTokenSecret }}
+              key: {{ required "You must provide discordBotTokenKey" .Values.discordBotTokenKey }}
+        {{ else -}}
+        {{- fail "You must provide either discordBotToken or discordBotTokenSecret" }}
+        {{ end }}
+        {{- if .Values.redisUrl }}
+        - name: REDIS_URL
+          value: {{ .Values.redisUrl }}
+        {{ else  if .Values.redisUrlSecret }}
+        - name: REDIS_URL
+          valueFrom:
+            secretKeyRef:
+              name: {{ .Values.redisUrlSecret }}
+              key: {{ required "You must provide redisUrlKey" .Values.redisUrlKey }}
+        {{ else -}}
+        - name: REDIS_URL
+          value: "redis://flashbot-redis-master:6379"
+        {{ end }}

@@ -1,3 +1,6 @@
 redis:
   enabled: true
   architecture: standalone
+
+discordBotTokenSecret: discord-token
+discordBotTokenKey: token
