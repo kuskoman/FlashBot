@@ -1,9 +1,9 @@
 package bot.commands.text
 
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent
-import bot.handler.TextCommandsHandlerFactory
+import bot.handler.TextTextCommandsHandlerFactory
 
-class ListCommandsCommand implements Command {
+class ListTextCommandsTextCommand implements TextCommand {
 
     @Override
     String getName() {
@@ -22,9 +22,9 @@ class ListCommandsCommand implements Command {
 
     @Override
     void execute(MessageReceivedEvent event, String args) {
-        def handler = TextCommandsHandlerFactory.getHandler()
-        def commands = handler.getCommands()
-        def message = 'Commands: '
+        def handler = TextTextCommandsHandlerFactory.getHandler()
+        def commands = handler.getTextCommands()
+        def message = 'TextCommands: '
         message += commands.collect { command -> command.getName() }.join(', ')
         event.getChannel().sendMessage(message).queue()
     }

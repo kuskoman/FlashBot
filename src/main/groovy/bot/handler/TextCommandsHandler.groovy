@@ -3,44 +3,44 @@ package bot.handler
 import bot.commands.text.*
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent
 
-class TextCommandsHandler {
+class TextTextCommandsHandler {
 
-    private Map<String, Command> commands = new HashMap<String, Command>()
+    private Map<String, TextCommand> commands = new HashMap<String, TextCommand>()
 
     // implement constructor that takes a list of commands and adds them to the map
-    TextCommandsHandler(List<Command> commands) {
-        commands.each { command -> addCommand(command) }
+    TextTextCommandsHandler(List<TextCommand> commands) {
+        commands.each { command -> addTextCommand(command) }
     }
 
-    void addCommand(Command command) {
+    void addTextCommand(TextCommand command) {
         commands.put(command.getName(), command)
     }
 
-    Command getCommand(String command) {
+    TextCommand getTextCommand(String command) {
         return commands.get(command)
     }
 
-    List<Command> getCommands() {
+    List<TextCommand> getTextCommands() {
         return commands.values().toList()
     }
 
-    void executeCommand(String command, MessageReceivedEvent event, String args) {
-        def commandhandler = getTextCommandsHandler(command)
+    void executeTextCommand(String command, MessageReceivedEvent event, String args) {
+        def commandhandler = getTextTextCommandsHandler(command)
 
         if (commandhandler == null) {
-            event.getChannel().sendMessage('Command not found').queue()
+            event.getChannel().sendMessage('TextCommand not found').queue()
             return
         }
 
         commandhandler.execute(event, args)
     }
 
-    private Command getTextCommandsHandler(String command) {
+    private TextCommand getTextTextCommandsHandler(String command) {
         if (commands.containsKey(command)) {
             return commands.get(command)
         }
-        def defaultCommand = new DefaultCommand()
-        return defaultCommand
+        def defaultTextCommand = new DefaultTextCommand()
+        return defaultTextCommand
     }
 
 }

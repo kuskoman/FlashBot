@@ -1,10 +1,10 @@
 package bot.commands.text.radio
 
 import radio.RadioManager
-import bot.commands.text.Command
+import bot.commands.text.TextCommand
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent
 
-class RemoveRadioCommand implements Command {
+class RemoveRadioTextCommand implements TextCommand {
 
     @Override
     String getName() {

@@ -2,7 +2,7 @@ package bot.commands.text
 
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent
 
-class DefaultCommand implements Command {
+class DefaultTextCommand implements TextCommand {
 
     @Override
     String getName() {
@@ -21,7 +21,7 @@ class DefaultCommand implements Command {
 
     @Override
     void execute(MessageReceivedEvent event, String args) {
-        def message = 'Command not found. Use `list` command to list all commands'
+        def message = 'TextCommand not found. Use `list` command to list all commands'
         event.getChannel().sendMessage(message).queue()
     }
 

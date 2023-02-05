@@ -2,7 +2,7 @@ package bot.commands.text
 
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent
 
-public class PingCommand implements Command {
+public class PingTextCommand implements TextCommand {
 
     @Override
     public String getName() {

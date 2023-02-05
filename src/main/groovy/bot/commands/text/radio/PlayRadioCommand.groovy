@@ -1,11 +1,11 @@
 package bot.commands.text.radio
 
-import bot.commands.text.Command
+import bot.commands.text.TextCommand
 import player.PlayerManager
 import radio.RadioManager
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent
 
-class PlayRadioCommand implements Command {
+class PlayRadioTextCommand implements TextCommand {
 
     @Override
     String getName() {

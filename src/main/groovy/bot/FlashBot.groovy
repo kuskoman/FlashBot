@@ -7,11 +7,11 @@ import bot.handler.*
 class FlashBot extends ListenerAdapter {
 
     private String prefix
-    private TextCommandsHandler handler
+    private TextTextCommandsHandler handler
 
     FlashBot(String prefix = "!") {
         this.prefix = prefix
-        this.handler = TextCommandsHandlerFactory.getHandler()
+        this.handler = TextTextCommandsHandlerFactory.getHandler()
     }
 
     String getPrefix() {
@@ -35,7 +35,7 @@ class FlashBot extends ListenerAdapter {
 
         def command = messageContent.substring(prefix.length()).split(' ')[0]
         def args = messageContent.substring(prefix.length() + command.length()).trim()
-        handler.executeCommand(command, event, args)
+        handler.executeTextCommand(command, event, args)
     }
 
 }

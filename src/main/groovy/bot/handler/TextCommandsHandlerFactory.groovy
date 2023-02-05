@@ -3,31 +3,31 @@ package bot.handler
 import bot.commands.text.*
 import bot.commands.text.radio.*
 
-class TextCommandsHandlerFactory {
+class TextTextCommandsHandlerFactory {
 
-    private static TextCommandsHandler handler
+    private static TextTextCommandsHandler handler
 
-    static TextCommandsHandler getHandler() {
+    static TextTextCommandsHandler getHandler() {
         if (handler == null) {
-            def commands = getCommands()
-            handler = new TextCommandsHandler(commands)
+            def commands = getTextCommands()
+            handler = new TextTextCommandsHandler(commands)
         }
 
         return handler
     }
 
-    private static List<Command> getCommands() {
+    private static List<TextCommand> getTextCommands() {
         return [
-            new ListCommandsCommand(),
-            new PingCommand(),
-            new HelpCommand(),
-            new AddRadioCommand(),
-            new RemoveRadioCommand(),
-            new ListRadioCommand(),
-            new PlayRadioCommand(),
-            new RemoveRadioCommand(),
-            new BackupRadioCommand(),
-            new RestoreRadioBackupCommand(),
+            new ListTextCommandsTextCommand(),
+            new PingTextCommand(),
+            new HelpTextCommand(),
+            new AddRadioTextCommand(),
+            new RemoveRadioTextCommand(),
+            new ListRadioTextCommand(),
+            new PlayRadioTextCommand(),
+            new RemoveRadioTextCommand(),
+            new BackupRadioTextCommand(),
+            new RestoreRadioBackupTextCommand(),
         ]
     }
 

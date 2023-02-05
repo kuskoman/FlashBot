@@ -2,7 +2,7 @@ package bot.commands.text
 
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent
 
-interface Command {
+interface TextCommand {
 
     String getName()
     String getDescription()
