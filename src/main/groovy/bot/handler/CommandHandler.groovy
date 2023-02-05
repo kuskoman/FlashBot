@@ -38,10 +38,9 @@ class CommandHandler {
     private Command getCommandHandler(String command) {
         if (commands.containsKey(command)) {
             return commands.get(command)
-    } else {
-            def defaultCommand = new DefaultCommand()
-            return defaultCommand
         }
+        def defaultCommand = new DefaultCommand()
+        return defaultCommand
     }
 
 }
