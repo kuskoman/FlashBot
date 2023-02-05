@@ -1,16 +1,16 @@
 package bot.handler
 
-import bot.commands.*
-import bot.commands.radio.*
+import bot.commands.text.*
+import bot.commands.text.radio.*
 
-class CommandHandlerFactory {
+class TextCommandsHandlerFactory {
 
-    private static CommandHandler handler
+    private static TextCommandsHandler handler
 
-    static CommandHandler getHandler() {
+    static TextCommandsHandler getHandler() {
         if (handler == null) {
             def commands = getCommands()
-            handler = new CommandHandler(commands)
+            handler = new TextCommandsHandler(commands)
         }
 
         return handler

@@ -1,4 +1,4 @@
-package bot.commands
+package bot.commands.text
 
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent
 

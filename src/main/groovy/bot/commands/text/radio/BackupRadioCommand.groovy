@@ -1,7 +1,7 @@
-package bot.commands.radio
+package bot.commands.text.radio
 
 import radio.RadioManager
-import bot.commands.Command
+import bot.commands.text.Command
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent
 
 class BackupRadioCommand implements Command {

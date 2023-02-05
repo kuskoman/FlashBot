@@ -7,11 +7,11 @@ import bot.handler.*
 class FlashBot extends ListenerAdapter {
 
     private String prefix
-    private CommandHandler handler
+    private TextCommandsHandler handler
 
     FlashBot(String prefix = "!") {
         this.prefix = prefix
-        this.handler = CommandHandlerFactory.getHandler()
+        this.handler = TextCommandsHandlerFactory.getHandler()
     }
 
     String getPrefix() {

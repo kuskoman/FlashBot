@@ -1,7 +1,7 @@
-package bot.commands
+package bot.commands.text
 
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent
-import bot.handler.CommandHandlerFactory
+import bot.handler.TextCommandsHandlerFactory
 
 class HelpCommand implements Command {
 
@@ -22,7 +22,7 @@ class HelpCommand implements Command {
 
     @Override
     void execute(MessageReceivedEvent event, String args) {
-        def handler = CommandHandlerFactory.getHandler()
+        def handler = TextCommandsHandlerFactory.getHandler()
         def command = handler.getCommand(args)
         if (!command) {
             event.getChannel().sendMessage("You must provide a command.\nUsage: `${getUsage()}`").queue()

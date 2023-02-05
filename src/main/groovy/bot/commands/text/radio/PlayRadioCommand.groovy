@@ -1,6 +1,6 @@
-package bot.commands.radio
+package bot.commands.text.radio
 
-import bot.commands.Command
+import bot.commands.text.Command
 import player.PlayerManager
 import radio.RadioManager
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent

@@ -1,14 +1,14 @@
 package bot.handler
 
-import bot.commands.*
+import bot.commands.text.*
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent
 
-class CommandHandler {
+class TextCommandsHandler {
 
     private Map<String, Command> commands = new HashMap<String, Command>()
 
     // implement constructor that takes a list of commands and adds them to the map
-    CommandHandler(List<Command> commands) {
+    TextCommandsHandler(List<Command> commands) {
         commands.each { command -> addCommand(command) }
     }
 
@@ -25,7 +25,7 @@ class CommandHandler {
     }
 
     void executeCommand(String command, MessageReceivedEvent event, String args) {
-        def commandhandler = getCommandHandler(command)
+        def commandhandler = getTextCommandsHandler(command)
 
         if (commandhandler == null) {
             event.getChannel().sendMessage('Command not found').queue()
@@ -35,7 +35,7 @@ class CommandHandler {
         commandhandler.execute(event, args)
     }
 
-    private Command getCommandHandler(String command) {
+    private Command getTextCommandsHandler(String command) {
         if (commands.containsKey(command)) {
             return commands.get(command)
         }

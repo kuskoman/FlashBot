@@ -1,38 +1,37 @@
-package bot.commands.radio
+package bot.commands.text.radio
 
-import bot.commands.Command
 import radio.RadioManager
+import bot.commands.text.Command
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent
 
-class AddRadioCommand implements Command {
+class RemoveRadioCommand implements Command {
 
     @Override
     String getName() {
-        return 'addradio'
+        return 'removeradio'
     }
 
     @Override
     String getDescription() {
-        return 'Add a radio to the list'
+        return 'Remove a radio from the list'
     }
 
     @Override
     String getUsage() {
-        return 'addradio <name> <url>'
+        return 'removeradio <name>'
     }
 
     @Override
     void execute(MessageReceivedEvent event, String args) {
-        def radioManager = new RadioManager()
         def splittedArgs = args.split(' ')
-        if (splittedArgs.size() != 2) {
+        if (splittedArgs.size() != 1) {
             event.getChannel().sendMessage("Invalid arguments. Usage: `${getUsage()}`").queue()
             return
         }
         def radioName = splittedArgs[0]
-        def radioUrl = splittedArgs[1]
-        radioManager.addRadio(radioName, radioUrl)
-        event.getChannel().sendMessage('Radio added').queue()
+        def radioManager = new RadioManager()
+        radioManager.removeRadio(radioName)
+        event.getChannel().sendMessage('Radio removed').queue()
     }
 
 }
