@@ -29,12 +29,11 @@ class PlayerManager {
     }
 
     public void loadAndPlay(MessageReceivedEvent event, String trackUrl) {
-        println 'loadAndPlay'
-
         def guild = event.getGuild()
         def musicManager = getGuildAudioPlayer(guild)
         def player = musicManager.player
         connectToVoiceChannel(event)
+        println "Loading track $trackUrl"
         playerManager.loadItemOrdered(musicManager, trackUrl, new AudioLoadResultHandler() {
 
             @Override
@@ -46,6 +45,7 @@ class PlayerManager {
                     return
                 }
 
+                println "Playing $track.info.title"
                 player.startTrack(track, false)
             }
 
