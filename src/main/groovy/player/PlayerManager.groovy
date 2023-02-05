@@ -3,16 +3,23 @@ package player
 import com.sedmelluq.discord.lavaplayer.player.DefaultAudioPlayerManager
 import net.dv8tion.jda.api.entities.Guild
 import com.sedmelluq.discord.lavaplayer.player.AudioLoadResultHandler
+import com.sedmelluq.discord.lavaplayer.source.AudioSourceManagers
 import com.sedmelluq.discord.lavaplayer.tools.FriendlyException
 import com.sedmelluq.discord.lavaplayer.track.AudioPlaylist
 import com.sedmelluq.discord.lavaplayer.track.AudioTrack
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent
 
+/* groovylint-disable-next-line LineLength */
 // https://github.com/sedmelluq/lavaplayer/blob/master/demo-jda/src/main/java/com/sedmelluq/discord/lavaplayer/demo/jda/Main.java
 class PlayerManager {
 
     private final static musicManagers = new HashMap<String, GuildPlayer>()
     private static final playerManager = new DefaultAudioPlayerManager()
+
+    static {
+        AudioSourceManagers.registerRemoteSources(playerManager)
+        AudioSourceManagers.registerLocalSource(playerManager)
+    }
 
     public static void play(MessageReceivedEvent event, String trackUrl) {
         def guild = event.getGuild()
@@ -22,6 +29,7 @@ class PlayerManager {
 
             @Override
             void trackLoaded(AudioTrack track) {
+                println 'trackLoaded'
                 play(guild, track)
             }
 

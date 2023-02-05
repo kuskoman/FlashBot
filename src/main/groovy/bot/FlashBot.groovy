@@ -22,7 +22,7 @@ class FlashBot extends ListenerAdapter {
         this.prefix = prefix
     }
 
-  @Override
+    @Override
     void onMessageReceived(MessageReceivedEvent event) {
         if (event.getAuthor().isBot()) {
             return
