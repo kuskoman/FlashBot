@@ -1,8 +1,8 @@
 package bot.commands.radio
 
+import radio.RadioManager
 import bot.commands.Command
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent
-import redis.RedisClientFactory
 
 class RemoveRadioCommand implements Command {
 
@@ -23,15 +23,14 @@ class RemoveRadioCommand implements Command {
 
     @Override
     void execute(MessageReceivedEvent event, String args) {
-        def redis = RedisClientFactory.getClient()
         def splittedArgs = args.split(' ')
         if (splittedArgs.size() != 1) {
             event.getChannel().sendMessage("Invalid arguments. Usage: `${getUsage()}`").queue()
             return
         }
         def radioName = splittedArgs[0]
-        def bucket = redis.getBucket('radios')
-        bucket.delete(radioName)
+        def radioManager = new RadioManager()
+        radioManager.removeRadio(radioName)
         event.getChannel().sendMessage('Radio removed').queue()
     }
 

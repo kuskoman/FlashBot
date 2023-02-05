@@ -1,6 +1,7 @@
 package bot.commands.radio
 
 import bot.commands.Command
+import radio.RadioManager
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent
 import redis.RedisClientFactory
 

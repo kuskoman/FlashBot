@@ -1,8 +1,8 @@
 package bot.commands.radio
 
 import bot.commands.Command
+import radio.RadioManager
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent
-import redis.RedisClientFactory
 
 class AddRadioCommand implements Command {
 
@@ -23,7 +23,7 @@ class AddRadioCommand implements Command {
 
     @Override
     void execute(MessageReceivedEvent event, String args) {
-        def redis = RedisClientFactory.getClient()
+        def radioManager = new RadioManager()
         def splittedArgs = args.split(' ')
         if (splittedArgs.size() != 2) {
             event.getChannel().sendMessage("Invalid arguments. Usage: `${getUsage()}`").queue()
@@ -31,8 +31,7 @@ class AddRadioCommand implements Command {
         }
         def radioName = splittedArgs[0]
         def radioUrl = splittedArgs[1]
-        def map = redis.getMap('radios')
-        map.put(radioName, radioUrl)
+        radioManager.addRadio(radioName, radioUrl)
         event.getChannel().sendMessage('Radio added').queue()
     }
 
