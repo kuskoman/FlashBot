@@ -11,9 +11,9 @@ COPY . .
 RUN gradle jar --no-daemon 
 
 
-FROM amazoncorretto:17.0.6-alpine3.17 as runtime
+FROM amazoncorretto:17.0.6 as runtime
 
-RUN apk add --no-cache opus lame ffmpeg flac
+RUN yum install -y opus lame flac fdk-aac libvorbis libogg
 
 COPY --from=build /app/build/libs/*.jar /app/app.jar
 
