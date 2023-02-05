@@ -38,19 +38,16 @@ jobs:
   build-docker-image:
     runs-on: ubuntu-latest
     needs: test-gradle-project
+    # run only on master branch
+    if: github.ref == 'refs/heads/master'
     steps:
       - name: Checkout project sources
         uses: actions/checkout@v2
-      - name: Set lowercased repository name and branch
-        run: |
-          echo "repository_lowercased_name=$(echo ${{ github.event.repository.name }} | tr '[:upper:]' '[:lower:]')" >> $GITHUB_ENV
-          echo "branch=${GITHUB_REF##*/}" >> $GITHUB_ENV
-      - name: Build and push Docker image
-        uses: docker/build-push-action@v2
+      - name: Set lowercased repository name
+        run: echo "repository_lowercased_name=$(echo ${{ github.event.repository.name }} | tr '[:upper:]' '[:lower:]')" >> $GITHUB_ENV
+      - name: Build and publish a Docker image
+        uses: macbre/push-to-ghcr@master
         with:
-          context: .
-          file: ./Dockerfile
-          push: true
-          tags: ghcr.io/${{ github.repository_owner }}/${{ env.repository_lowercased_name }}:${{ env.branch }}
-          username: ${{ github.repository_owner }}
-          password: ${{ secrets.GITHUB_TOKEN }}
+          image_name: ${{ env.repository_lowercased_name }}
+          image_tag: latest
+          github_token: ${{ secrets.GH_PAT }}
