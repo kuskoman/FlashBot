@@ -5,22 +5,22 @@ import bot.handler.CommandHandlerFactory
 
 class ListCommandsCommand implements Command {
 
-  @Override
+    @Override
     String getName() {
         return 'list'
     }
 
-  @Override
+    @Override
     String getDescription() {
         return 'Lists all commands'
     }
 
-  @Override
+    @Override
     String getUsage() {
         return 'list'
     }
 
-  @Override
+    @Override
     void execute(MessageReceivedEvent event, String args) {
         def handler = CommandHandlerFactory.getHandler()
         def commands = handler.getCommands()
